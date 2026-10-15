@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flutter Structure • CIE-2 • Widget Trees (Color Coded)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 30px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .toolbar {
+      position: sticky;
+      top: 15px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      padding: 12px 28px;
+      border-radius: 30px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 24px;
+      border: 1px solid #e2e8f0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .toolbar h1 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .legend {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #334155;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+    .toolbar button {
+      background: #0f172a;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+    .toolbar button:hover {
+      background: #334155;
+    }
+    .page-container {
+      margin-bottom: 30px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      background: white;
+      width: 794px;
+      height: 1123px;
+    }
+    .a4-page {
+      width: 794px;
+      height: 1123px;
+      display: block;
+    }
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .toolbar {
+        display: none !important;
+      }
+      .page-container {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+        page-break-after: always;
+        width: 100%;
+        height: 100vh;
+      }
+      .a4-page {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <h1>Flutter Structure • Widget Trees</h1>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#EEF2FF; border:1px solid #6366F1;"></span>Structure</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#FAF5FF; border:1px solid #A855F7;"></span>Navigation</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#F0FDF4; border:1px solid #22C55E;"></span>Containers</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#ECFEFF; border:1px solid #06B6D4;"></span>Lists</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#FFFBEB; border:1px solid #F59E0B;"></span>Inputs</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#FFF1F2; border:1px solid #F43F5E;"></span>Buttons</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#EFF6FF; border:1px solid #3B82F6;"></span>Content</span>
+    </div>
+    <button onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">1. Login Screen</text>
+<line x1="295.0" y1="418.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="202.0" x2="220.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="334.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="370.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Center</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="162.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="376.2" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Welcome Back)</text>
+<rect x="295.0" y="250.0" width="132.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="361.2" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Subtitle)</text>
+<rect x="295.0" y="286.0" width="147.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="368.8" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Email)</text>
+<rect x="295.0" y="322.0" width="170.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="380.0" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Password)</text>
+<rect x="295.0" y="358.0" width="192.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="391.2" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">ElevatedButton (Log In)</text>
+<rect x="295.0" y="394.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="329.0" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Row</text>
+<rect x="370.0" y="430.0" width="68.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="404.0" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text</text>
+<rect x="370.0" y="466.0" width="222.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="481.2" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">TextButton (Create Account)</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">2. Create Account Screen</text>
+<line x1="295.0" y1="490.0" x2="295.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="514.0" x2="370.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="550.0" x2="370.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="202.0" x2="220.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="334.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="370.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="442.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="478.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Center</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="177.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="383.8" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Create Account)</text>
+<rect x="295.0" y="250.0" width="132.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="361.2" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Subtitle)</text>
+<rect x="295.0" y="286.0" width="177.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="383.8" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Full Name)</text>
+<rect x="295.0" y="322.0" width="147.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="368.8" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Email)</text>
+<rect x="295.0" y="358.0" width="170.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="380.0" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Password)</text>
+<rect x="295.0" y="394.0" width="230.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="410.0" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Confirm Password)</text>
+<rect x="295.0" y="430.0" width="252.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="421.2" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">ElevatedButton (Create Account)</text>
+<rect x="295.0" y="466.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="329.0" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Row</text>
+<rect x="370.0" y="502.0" width="68.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="404.0" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text</text>
+<rect x="370.0" y="538.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="451.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">TextButton (Log In)</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">3. Dashboard Overview</text>
+<line x1="295.0" y1="274.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="418.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="370.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="478.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="192.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="391.2" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Net Balance)</text>
+<rect x="295.0" y="250.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="329.0" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Row</text>
+<rect x="370.0" y="286.0" width="155.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="447.5" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Income)</text>
+<rect x="370.0" y="322.0" width="170.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="455.0" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Expenses)</text>
+<rect x="295.0" y="358.0" width="185.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="387.5" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Recent Activity)</text>
+<rect x="295.0" y="394.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="430.0" width="80.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="410.0" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile</text>
+<rect x="295.0" y="466.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">4. All Transactions</text>
+<line x1="370.0" y1="310.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="370.0" y1="334.0" x2="445.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="370.0" y1="370.0" x2="445.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="370.0" y1="406.0" x2="445.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="370.0" y1="442.0" x2="445.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="370.0" y1="478.0" x2="445.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="274.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="192.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="391.2" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (All Transactions)</text>
+<rect x="295.0" y="250.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="286.0" width="80.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="410.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile</text>
+<rect x="445.0" y="322.0" width="68.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="479.0" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon</text>
+<rect x="445.0" y="358.0" width="110.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="500.0" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Title)</text>
+<rect x="445.0" y="394.0" width="132.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="511.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Category)</text>
+<rect x="445.0" y="430.0" width="102.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="496.2" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Date)</text>
+<rect x="445.0" y="466.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="503.8" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Amount)</text>
+<rect x="295.0" y="502.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">5. Menu / Screen List</text>
+<line x1="295.0" y1="202.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="226.0" x2="370.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="262.0" x2="370.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="346.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="514.0" x2="370.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="334.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="117.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="353.8" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">Drawer / Menu</text>
+<rect x="370.0" y="214.0" width="102.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="421.2" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">User Avatar</text>
+<rect x="370.0" y="250.0" width="102.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="421.2" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (User)</text>
+<rect x="370.0" y="286.0" width="110.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="425.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Email)</text>
+<rect x="295.0" y="322.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="358.0" width="170.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="455.0" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Dashboard)</text>
+<rect x="370.0" y="394.0" width="192.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="466.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Transactions)</text>
+<rect x="370.0" y="430.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="458.8" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Categories)</text>
+<rect x="370.0" y="466.0" width="147.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="443.8" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Budget)</text>
+<rect x="370.0" y="502.0" width="162.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="451.2" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Settings)</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">6. Categories Breakdown</text>
+<line x1="295.0" y1="274.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="418.0" x2="295.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="514.0" x2="370.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="550.0" x2="370.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="586.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="370.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="586.0" x2="295.0" y2="586.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="207.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="398.8" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Expense Categories)</text>
+<rect x="295.0" y="250.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="329.0" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Row</text>
+<rect x="370.0" y="286.0" width="140.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="440.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Breakdown)</text>
+<rect x="370.0" y="322.0" width="140.0" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="440.0" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">TextButton (Add)</text>
+<rect x="295.0" y="358.0" width="177.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="383.8" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Total Expenses)</text>
+<rect x="295.0" y="394.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="430.0" width="132.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="436.2" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Food)</text>
+<rect x="370.0" y="466.0" width="170.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="455.0" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Transport)</text>
+<rect x="370.0" y="502.0" width="140.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="440.0" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Bills)</text>
+<rect x="370.0" y="538.0" width="162.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="451.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Shopping)</text>
+<rect x="295.0" y="574.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="590.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">7. Monthly Budget</text>
+<line x1="220.0" y1="166.0" x2="220.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="334.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="370.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="442.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="237.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="413.8" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Monthly Budget Tracker)</text>
+<rect x="295.0" y="250.0" width="200.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="395.0" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Budget Limit)</text>
+<rect x="295.0" y="286.0" width="192.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="391.2" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Total Spent)</text>
+<rect x="295.0" y="322.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="383.8" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Remaining)</text>
+<rect x="295.0" y="358.0" width="252.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="421.2" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Update Budget Limit)</text>
+<rect x="295.0" y="394.0" width="192.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="391.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">ElevatedButton (Update)</text>
+<rect x="295.0" y="430.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">8. Log Expense</text>
+<line x1="220.0" y1="202.0" x2="220.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="334.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="370.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="442.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="478.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="308.8" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">SingleChildScrollView</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="250.0" width="185.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="387.5" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Log New Expense)</text>
+<rect x="295.0" y="286.0" width="207.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="398.8" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Expense Title)</text>
+<rect x="295.0" y="322.0" width="215.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="402.5" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Expense Amount)</text>
+<rect x="295.0" y="358.0" width="207.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="398.8" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">DropdownButton (Category)</text>
+<rect x="295.0" y="394.0" width="147.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="368.8" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">DatePicker (Date)</text>
+<rect x="295.0" y="430.0" width="237.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="413.8" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">ElevatedButton (Save Expense)</text>
+<rect x="295.0" y="466.0" width="200.0" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="395.0" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">TextButton (Change Date)</text>
+<rect x="295.0" y="502.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">9. Add Salary / Income</text>
+<line x1="220.0" y1="202.0" x2="220.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="334.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="370.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="442.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="478.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="308.8" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">SingleChildScrollView</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="250.0" width="215.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="402.5" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Add Income / Salary)</text>
+<rect x="295.0" y="286.0" width="252.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="421.2" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Income Source Title)</text>
+<rect x="295.0" y="322.0" width="275.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="432.5" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Salary / Income Amount)</text>
+<rect x="295.0" y="358.0" width="260.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="425.0" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">DropdownButton (Income Category)</text>
+<rect x="295.0" y="394.0" width="147.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="368.8" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">DatePicker (Date)</text>
+<rect x="295.0" y="430.0" width="230.0" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="410.0" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">ElevatedButton (Save Income)</text>
+<rect x="295.0" y="466.0" width="200.0" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="395.0" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">TextButton (Change Date)</text>
+<rect x="295.0" y="502.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">10. Search</text>
+<line x1="295.0" y1="310.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="478.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="155.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="372.5" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Search)</text>
+<rect x="295.0" y="250.0" width="230.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="410.0" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Matching Transactions)</text>
+<rect x="295.0" y="286.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="322.0" width="147.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="443.8" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Dinner)</text>
+<rect x="370.0" y="358.0" width="132.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="436.2" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Mall)</text>
+<rect x="370.0" y="394.0" width="125.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="432.5" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Bus)</text>
+<rect x="370.0" y="430.0" width="147.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="443.8" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Salary)</text>
+<rect x="295.0" y="466.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">11. Currency Settings</text>
+<line x1="295.0" y1="310.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="200.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="395.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Currency Settings)</text>
+<rect x="295.0" y="250.0" width="185.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="387.5" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Select Currency)</text>
+<rect x="295.0" y="286.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="322.0" width="230.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="485.0" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">RadioListTile (\$ US Dollar)</text>
+<rect x="370.0" y="358.0" width="245.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="492.5" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">RadioListTile (₹ Indian Rupee)</text>
+<rect x="370.0" y="394.0" width="185.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="462.5" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">RadioListTile (€ Euro)</text>
+<rect x="370.0" y="430.0" width="192.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="466.2" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">RadioListTile (£ Pound)</text>
+<rect x="370.0" y="466.0" width="177.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="458.8" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">RadioListTile (¥ Yen)</text>
+<rect x="295.0" y="502.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">12. Profile & Settings</text>
+<line x1="295.0" y1="274.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="202.0" x2="220.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="442.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="478.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="550.0" x2="295.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="308.8" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">SingleChildScrollView</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="250.0" width="162.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="376.2" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Profile)</text>
+<rect x="370.0" y="286.0" width="110.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="425.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">CircleAvatar</text>
+<rect x="370.0" y="322.0" width="102.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="421.2" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (User)</text>
+<rect x="370.0" y="358.0" width="110.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="425.0" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Email)</text>
+<rect x="295.0" y="394.0" width="237.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="413.8" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">Button (Edit Profile & Goals)</text>
+<rect x="295.0" y="430.0" width="207.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="398.8" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Salary Target)</text>
+<rect x="295.0" y="466.0" width="222.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="406.2" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Account Summary)</text>
+<rect x="295.0" y="502.0" width="140.0" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="365.0" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">Button (Log Out)</text>
+<rect x="295.0" y="538.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">13. Subscriptions</text>
+<line x1="295.0" y1="238.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="262.0" x2="370.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="346.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="514.0" x2="370.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="334.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="550.0" x2="295.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="200.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="395.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Monthly Cost)</text>
+<rect x="370.0" y="250.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Active)</text>
+<rect x="370.0" y="286.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Paused)</text>
+<rect x="295.0" y="322.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="358.0" width="155.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="447.5" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Netflix)</text>
+<rect x="370.0" y="394.0" width="155.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="447.5" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Spotify)</text>
+<rect x="370.0" y="430.0" width="147.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="443.8" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (iCloud)</text>
+<rect x="370.0" y="466.0" width="192.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="466.2" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Amazon Prime)</text>
+<rect x="370.0" y="502.0" width="200.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="470.0" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Microsoft 365)</text>
+<rect x="295.0" y="538.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">14. Bill Reminders</text>
+<line x1="295.0" y1="238.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="262.0" x2="370.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="382.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="334.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="370.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="550.0" x2="295.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="207.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="398.8" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Monthly Total)</text>
+<rect x="370.0" y="250.0" width="102.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="421.2" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Paid)</text>
+<rect x="370.0" y="286.0" width="140.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="440.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Remaining)</text>
+<rect x="295.0" y="322.0" width="125.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="357.5" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Overdue)</text>
+<rect x="295.0" y="358.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="394.0" width="162.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="451.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Internet)</text>
+<rect x="370.0" y="430.0" width="185.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="462.5" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Electricity)</text>
+<rect x="370.0" y="466.0" width="207.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="473.8" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Gym Membership)</text>
+<rect x="295.0" y="502.0" width="252.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="421.2" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">FloatingActionButton (Add Bill)</text>
+<rect x="295.0" y="538.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">15. Loan Tracker</text>
+<line x1="295.0" y1="382.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="334.0" x2="295.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="370.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="170.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="380.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (You Lent)</text>
+<rect x="295.0" y="250.0" width="162.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="376.2" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (You Owe)</text>
+<rect x="295.0" y="286.0" width="132.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="361.2" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Net)</text>
+<rect x="295.0" y="322.0" width="177.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="383.8" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">Switch (Show Settled)</text>
+<rect x="295.0" y="358.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="394.0" width="132.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="436.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (John)</text>
+<rect x="370.0" y="430.0" width="132.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="436.2" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Sara)</text>
+<rect x="370.0" y="466.0" width="132.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="436.2" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Bank)</text>
+<rect x="295.0" y="502.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">16. Notes & Memos</text>
+<line x1="295.0" y1="274.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="442.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="200.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="395.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Search Notes)</text>
+<rect x="295.0" y="250.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="286.0" width="245.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="492.5" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Monthly Budget Plan)</text>
+<rect x="370.0" y="322.0" width="185.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="462.5" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Saving Tips)</text>
+<rect x="370.0" y="358.0" width="222.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="481.2" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Investment Ideas)</text>
+<rect x="295.0" y="394.0" width="252.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="421.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">FloatingActionButton (New Note)</text>
+<rect x="295.0" y="430.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">17. Dashboard Navigation</text>
+<line x1="295.0" y1="202.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="226.0" x2="370.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="274.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Body</text>
+<rect x="370.0" y="214.0" width="140.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="440.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0F172A">Dashboard Screen</text>
+<rect x="295.0" y="250.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<rect x="370.0" y="286.0" width="140.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="440.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Dashboard)</text>
+<rect x="370.0" y="322.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Salary)</text>
+<rect x="370.0" y="358.0" width="125.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="432.5" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Expense)</text>
+<rect x="370.0" y="394.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Search)</text>
+<rect x="370.0" y="430.0" width="125.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="432.5" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Profile)</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">18. Salary Navigation</text>
+<line x1="295.0" y1="202.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="226.0" x2="370.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="274.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Body</text>
+<rect x="370.0" y="214.0" width="162.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="451.2" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0F172A">Add Salary / Income</text>
+<rect x="295.0" y="250.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<rect x="370.0" y="286.0" width="140.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="440.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Dashboard)</text>
+<rect x="370.0" y="322.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Salary)</text>
+<rect x="370.0" y="358.0" width="125.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="432.5" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Expense)</text>
+<rect x="370.0" y="394.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Search)</text>
+<rect x="370.0" y="430.0" width="125.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="432.5" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Profile)</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">19. Expense Navigation</text>
+<line x1="295.0" y1="202.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="226.0" x2="370.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="274.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Body</text>
+<rect x="370.0" y="214.0" width="102.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="421.2" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0F172A">Log Expense</text>
+<rect x="295.0" y="250.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<rect x="370.0" y="286.0" width="140.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="440.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Dashboard)</text>
+<rect x="370.0" y="322.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Salary)</text>
+<rect x="370.0" y="358.0" width="125.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="432.5" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Expense)</text>
+<rect x="370.0" y="394.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Search)</text>
+<rect x="370.0" y="430.0" width="125.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="432.5" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Profile)</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">20. Search / Profile Navigation</text>
+<line x1="295.0" y1="202.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="226.0" x2="370.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="262.0" x2="370.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="310.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Body</text>
+<rect x="370.0" y="214.0" width="117.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="428.8" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0F172A">Search Screen</text>
+<rect x="370.0" y="250.0" width="155.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="447.5" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0F172A">Profile & Settings</text>
+<rect x="295.0" y="286.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<rect x="370.0" y="322.0" width="140.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="440.0" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Dashboard)</text>
+<rect x="370.0" y="358.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Salary)</text>
+<rect x="370.0" y="394.0" width="125.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="432.5" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Expense)</text>
+<rect x="370.0" y="430.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Search)</text>
+<rect x="370.0" y="466.0" width="125.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="432.5" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (Profile)</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">21. Goals & Savings</text>
+<line x1="295.0" y1="274.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="490.0" x2="295.0" y2="586.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="514.0" x2="370.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="550.0" x2="370.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="586.0" x2="370.0" y2="586.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="202.0" x2="220.0" y2="658.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="442.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="478.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="622.0" x2="295.0" y2="622.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="658.0" x2="295.0" y2="658.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="308.8" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">SingleChildScrollView</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="250.0" width="237.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="413.8" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Available Savings)</text>
+<rect x="370.0" y="286.0" width="200.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="470.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Available Savings)</text>
+<rect x="370.0" y="322.0" width="162.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="451.2" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Total Amount)</text>
+<rect x="370.0" y="358.0" width="72.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="406.2" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Divider</text>
+<rect x="370.0" y="394.0" width="162.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="451.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Row (Summary Stats)</text>
+<rect x="295.0" y="430.0" width="132.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="361.2" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (My Goals)</text>
+<rect x="295.0" y="466.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="502.0" width="207.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="473.8" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">GoalCard (Emergency Fund)</text>
+<rect x="370.0" y="538.0" width="162.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="451.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">GoalCard (Vacation)</text>
+<rect x="370.0" y="574.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="458.8" y="590.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">GoalCard (New Laptop)</text>
+<rect x="295.0" y="610.0" width="252.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="421.2" y="626.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">FloatingActionButton (New Goal)</text>
+<rect x="295.0" y="646.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="662.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">22. Monthly Reports</text>
+<line x1="295.0" y1="310.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="526.0" x2="295.0" y2="622.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="550.0" x2="370.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="586.0" x2="370.0" y2="586.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="622.0" x2="370.0" y2="622.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="706.0" x2="295.0" y2="802.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="730.0" x2="370.0" y2="730.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="766.0" x2="370.0" y2="766.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="802.0" x2="370.0" y2="802.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="202.0" x2="220.0" y2="838.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="478.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="658.0" x2="295.0" y2="658.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="694.0" x2="295.0" y2="694.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="838.0" x2="295.0" y2="838.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="308.8" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">SingleChildScrollView</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="250.0" width="200.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="395.0" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView (Period Filter)</text>
+<rect x="295.0" y="286.0" width="192.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="391.2" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Net Balance)</text>
+<rect x="370.0" y="322.0" width="155.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="447.5" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Net Balance)</text>
+<rect x="370.0" y="358.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Amount)</text>
+<rect x="370.0" y="394.0" width="72.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="406.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Divider</text>
+<rect x="370.0" y="430.0" width="222.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="481.2" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Row (Income, Expense, Rate)</text>
+<rect x="295.0" y="466.0" width="215.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="402.5" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Expense by Category)</text>
+<rect x="295.0" y="502.0" width="245.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="417.5" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Category Breakdown)</text>
+<rect x="370.0" y="538.0" width="155.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="447.5" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">CategoryBar (Food)</text>
+<rect x="370.0" y="574.0" width="162.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="451.2" y="590.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">CategoryBar (Bills)</text>
+<rect x="370.0" y="610.0" width="192.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="466.2" y="626.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">CategoryBar (Transport)</text>
+<rect x="295.0" y="646.0" width="162.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="376.2" y="662.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Transactions)</text>
+<rect x="295.0" y="682.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="698.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="370.0" y="718.0" width="200.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="470.0" y="734.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">TransactionTile (Salary)</text>
+<rect x="370.0" y="754.0" width="215.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="477.5" y="770.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">TransactionTile (Shopping)</text>
+<rect x="370.0" y="790.0" width="237.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="488.8" y="806.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">TransactionTile (Electricity)</text>
+<rect x="295.0" y="826.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="842.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">23. Net Worth</text>
+<line x1="295.0" y1="238.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="262.0" x2="370.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="418.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="526.0" x2="295.0" y2="622.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="550.0" x2="370.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="586.0" x2="370.0" y2="586.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="622.0" x2="370.0" y2="622.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="166.0" x2="220.0" y2="910.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="190.0" x2="295.0" y2="190.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="658.0" x2="295.0" y2="658.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="694.0" x2="295.0" y2="694.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="730.0" x2="295.0" y2="730.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="766.0" x2="295.0" y2="766.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="802.0" x2="295.0" y2="802.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="838.0" x2="295.0" y2="838.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="874.0" x2="295.0" y2="874.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="910.0" x2="295.0" y2="910.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="260.0" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">ListView</text>
+<rect x="295.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="214.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="383.8" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Net Worth)</text>
+<rect x="370.0" y="250.0" width="140.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="440.0" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Net Worth)</text>
+<rect x="370.0" y="286.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="428.8" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Amount)</text>
+<rect x="370.0" y="322.0" width="72.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="406.2" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Divider</text>
+<rect x="370.0" y="358.0" width="267.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="503.8" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Row (Assets, Liabilities, Health)</text>
+<rect x="295.0" y="394.0" width="207.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="398.8" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Debt-to-Asset)</text>
+<rect x="370.0" y="430.0" width="215.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="477.5" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Debt-to-Asset Ratio)</text>
+<rect x="370.0" y="466.0" width="192.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="466.2" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">LinearProgressIndicator</text>
+<rect x="295.0" y="502.0" width="222.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="406.2" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Asset Breakdown)</text>
+<rect x="370.0" y="538.0" width="192.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="466.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">CategoryProgress (Cash)</text>
+<rect x="370.0" y="574.0" width="245.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="492.5" y="590.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">CategoryProgress (Investments)</text>
+<rect x="370.0" y="610.0" width="222.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="481.2" y="626.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">CategoryProgress (Property)</text>
+<rect x="295.0" y="646.0" width="117.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="353.8" y="662.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Assets)</text>
+<rect x="295.0" y="682.0" width="215.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="402.5" y="698.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ItemTile (Savings Account)</text>
+<rect x="295.0" y="718.0" width="252.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="421.2" y="734.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ItemTile (Investment Portfolio)</text>
+<rect x="295.0" y="754.0" width="155.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="372.5" y="770.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Liabilities)</text>
+<rect x="295.0" y="790.0" width="222.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="406.2" y="806.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ItemTile (Credit Card Debt)</text>
+<rect x="295.0" y="826.0" width="192.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="391.2" y="842.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ItemTile (Student Loan)</text>
+<rect x="295.0" y="862.0" width="252.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="421.2" y="878.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">FloatingActionButton (Add Item)</text>
+<rect x="295.0" y="898.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="914.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">24. Export Data</text>
+<line x1="295.0" y1="274.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="454.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="202.0" x2="220.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="442.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="550.0" x2="295.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="308.8" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">SingleChildScrollView</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="250.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="383.8" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Card (Export Options)</text>
+<rect x="370.0" y="286.0" width="200.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="470.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Row (Format: CSV / Text)</text>
+<rect x="370.0" y="322.0" width="200.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="470.0" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0F172A">Dropdown (Select Period)</text>
+<rect x="370.0" y="358.0" width="207.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="473.8" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0F172A">CheckboxListTile (Income)</text>
+<rect x="370.0" y="394.0" width="222.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="481.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0F172A">CheckboxListTile (Expenses)</text>
+<rect x="295.0" y="430.0" width="185.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="387.5" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Card (Summary Preview)</text>
+<rect x="370.0" y="466.0" width="185.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="462.5" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Preview Content)</text>
+<rect x="295.0" y="502.0" width="275.0" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="432.5" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">ElevatedButton (Copy to Clipboard)</text>
+<rect x="295.0" y="538.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">25. Analytics & Insights</text>
+<line x1="295.0" y1="310.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="202.0" x2="220.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="298.0" x2="295.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="478.0" x2="295.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="514.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="550.0" x2="295.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="308.8" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">SingleChildScrollView</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="250.0" width="215.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="402.5" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Financial Analytics)</text>
+<rect x="295.0" y="286.0" width="80.0" height="24.0" rx="4" ry="4" fill="#ECFEFF" stroke="#06B6D4" stroke-width="1.2"/>
+<text x="335.0" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#0E7490">GridView</text>
+<rect x="370.0" y="322.0" width="237.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="488.8" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">StatCard (Total Transactions)</text>
+<rect x="370.0" y="358.0" width="215.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="477.5" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">StatCard (Average Expense)</text>
+<rect x="370.0" y="394.0" width="200.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="470.0" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">StatCard (Savings Ratio)</text>
+<rect x="370.0" y="430.0" width="215.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="477.5" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">StatCard (Highest Expense)</text>
+<rect x="295.0" y="466.0" width="237.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="413.8" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Monthly Spending Trend)</text>
+<rect x="295.0" y="502.0" width="237.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="413.8" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (Bar Chart Preview)</text>
+<rect x="295.0" y="538.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">26. Tax Estimator</text>
+<line x1="295.0" y1="274.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="406.0" x2="370.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="454.0" x2="295.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="514.0" x2="370.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="550.0" x2="370.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="202.0" x2="220.0" y2="622.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="442.0" x2="295.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="586.0" x2="295.0" y2="586.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="622.0" x2="295.0" y2="622.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="308.8" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">SingleChildScrollView</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="250.0" width="147.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="368.8" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Card (Tax Inputs)</text>
+<rect x="370.0" y="286.0" width="207.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="473.8" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Annual Income)</text>
+<rect x="370.0" y="322.0" width="185.0" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="462.5" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">TextField (Deductions)</text>
+<rect x="370.0" y="358.0" width="222.5" height="24.0" rx="4" ry="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="481.2" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#92400E">DropdownButton (Tax Region)</text>
+<rect x="370.0" y="394.0" width="245.0" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="492.5" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">ElevatedButton (Calculate Tax)</text>
+<rect x="295.0" y="430.0" width="155.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="372.5" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Card (Tax Summary)</text>
+<rect x="370.0" y="466.0" width="207.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="473.8" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Estimated Tax Owed)</text>
+<rect x="370.0" y="502.0" width="207.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="473.8" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Effective Tax Rate)</text>
+<rect x="370.0" y="538.0" width="222.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="481.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Estimated Net Income)</text>
+<rect x="295.0" y="574.0" width="185.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="387.5" y="590.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Tax Saving Tips)</text>
+<rect x="295.0" y="610.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="626.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+  <div class="page-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" class="a4-page">
+
+    <defs>
+      <pattern id="ruledLines" width="100" height="25" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="24.5" x2="100" y2="24.5" stroke="#f1f2f4" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    <rect width="100%" height="100%" fill="url(#ruledLines)"/>
+    
+<text x="397.0" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="600" fill="#1e293b">27. App Info / About</text>
+<line x1="295.0" y1="274.0" x2="295.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="298.0" x2="370.0" y2="298.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="334.0" x2="370.0" y2="334.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="370.0" x2="370.0" y2="370.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="418.0" x2="295.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="442.0" x2="370.0" y2="442.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="478.0" x2="370.0" y2="478.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="295.0" y1="514.0" x2="370.0" y2="514.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="202.0" x2="220.0" y2="586.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="226.0" x2="295.0" y2="226.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="262.0" x2="295.0" y2="262.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="406.0" x2="295.0" y2="406.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="550.0" x2="295.0" y2="550.0" stroke="#475569" stroke-width="1.3"/>
+<line x1="220.0" y1="586.0" x2="295.0" y2="586.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="220.0" y="70.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="86.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">Scaffold</text>
+<rect x="220.0" y="106.0" width="80.0" height="24.0" rx="4" ry="4" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.2"/>
+<text x="260.0" y="122.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#312E81">SafeArea</text>
+<rect x="220.0" y="142.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="308.8" y="158.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">SingleChildScrollView</text>
+<rect x="220.0" y="178.0" width="68.0" height="24.0" rx="4" ry="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="254.0" y="194.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E293B">Column</text>
+<rect x="295.0" y="214.0" width="68.0" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="329.0" y="230.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">AppBar</text>
+<rect x="295.0" y="250.0" width="177.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="383.8" y="266.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Container (App Brand)</text>
+<rect x="370.0" y="286.0" width="132.5" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="436.2" y="302.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Icon (App Logo)</text>
+<rect x="370.0" y="322.0" width="215.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="477.5" y="338.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Expense Tracker Pro)</text>
+<rect x="370.0" y="358.0" width="155.0" height="24.0" rx="4" ry="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="447.5" y="374.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#1E40AF">Text (Version 2.0)</text>
+<rect x="295.0" y="394.0" width="132.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="361.2" y="410.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">Card (Features)</text>
+<rect x="370.0" y="430.0" width="215.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="477.5" y="446.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Offline Storage)</text>
+<rect x="370.0" y="466.0" width="237.5" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="488.8" y="482.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Currency Converter)</text>
+<rect x="370.0" y="502.0" width="185.0" height="24.0" rx="4" ry="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.2"/>
+<text x="462.5" y="518.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#166534">ListTile (Data Export)</text>
+<rect x="295.0" y="538.0" width="252.5" height="24.0" rx="4" ry="4" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.2"/>
+<text x="421.2" y="554.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#9F1239">OutlinedButton (Reset All Data)</text>
+<rect x="295.0" y="574.0" width="162.5" height="24.0" rx="4" ry="4" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.2"/>
+<text x="376.2" y="590.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="11.5" font-weight="500" fill="#581C87">BottomNavigationBar</text>
+<text x="397.0" y="1101" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="10.5" fill="#9ca3af">Flutter Structure • CIE-2 • Widget Tree</text>
+</svg>
+  </div>
+
+</body>
+</html>

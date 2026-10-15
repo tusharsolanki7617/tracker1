@@ -1,0 +1,12 @@
+{
+  "tips": [
+    { "id": 1, "title": "Track Daily",        "body": "Log every purchase the same day to avoid forgetting small expenses that add up quickly." },
+    { "id": 2, "title": "50/30/20 Rule",       "body": "Allocate 50% of income to needs, 30% to wants, and 20% to savings and investments." },
+    { "id": 3, "title": "Emergency Fund",      "body": "Aim to save 3–6 months of living expenses as an emergency fund before investing." },
+    { "id": 4, "title": "Review Weekly",       "body": "Spend 10 minutes every Sunday reviewing your week's spending and planning the next." },
+    { "id": 5, "title": "Avoid Lifestyle Inflation", "body": "When your income increases, keep expenses steady and route the difference to savings." },
+    { "id": 6, "title": "Automate Savings",    "body": "Set up an automatic transfer to savings on payday so you save before you spend." },
+    { "id": 7, "title": "Cut Subscriptions",   "body": "Audit subscriptions every quarter. Cancel anything you haven't used in 30 days." },
+    { "id": 8, "title": "Meal Prep",           "body": "Cooking at home saves up to 60% compared to eating out. Prep meals on weekends." }
+  ]
+}

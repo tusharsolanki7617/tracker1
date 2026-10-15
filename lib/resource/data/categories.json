@@ -1,0 +1,12 @@
+[
+  { "id": "food",          "name": "Food & Dining",    "icon": "restaurant",      "color": "#F97316" },
+  { "id": "transport",     "name": "Transport",        "icon": "directions_car",  "color": "#8B5CF6" },
+  { "id": "bills",         "name": "Bills & Utilities","icon": "receipt",         "color": "#3B82F6" },
+  { "id": "shopping",      "name": "Shopping",         "icon": "shopping_bag",    "color": "#14B8A6" },
+  { "id": "entertainment", "name": "Entertainment",    "icon": "movie",           "color": "#EC4899" },
+  { "id": "health",        "name": "Health & Fitness", "icon": "favorite",        "color": "#10B981" },
+  { "id": "education",     "name": "Education",        "icon": "school",          "color": "#6366F1" },
+  { "id": "salary",        "name": "Salary",           "icon": "payments",        "color": "#059669" },
+  { "id": "investments",   "name": "Investments",      "icon": "trending_up",     "color": "#0284C7" },
+  { "id": "other",         "name": "Other",            "icon": "more_horiz",      "color": "#64748B" }
+]
