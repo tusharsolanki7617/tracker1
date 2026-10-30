@@ -18,3 +18,4 @@ class AppData {
   /// JSON list of onboarding screen configurations
   static const String onboarding = '$_base/onboarding.json';
 }
+
